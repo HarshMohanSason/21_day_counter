@@ -1,0 +1,48 @@
+#include "resource.h"
+#include "windows.h"
+#include "winuser.h"
+
+IDR_MYMENU MENU
+BEGIN
+    POPUP "&Menu"
+    BEGIN
+        MENUITEM "&Add new guest", ID_ADD_NEW_GUEST
+        MENUITEM "&Delete a guest", ID_DELETE_GUEST
+	MENUITEM "&Edit guest info", ID_EDIT_GUEST_INFO
+    END
+END
+
+ID_ADD_NEW_GUEST_DIALOG DIALOG DISCARDABLE 0, 0, 300, 200
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add a new guest"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL "Enter Guest Name:", -1, "STATIC", SS_LEFT, 10, 20, 100, 12
+    EDITTEXT          ID_GUEST_NAME, 120, 20, 160, 14
+
+    CONTROL "Enter Folio Number:", -1, "STATIC", SS_LEFT, 10, 45, 100, 12
+    EDITTEXT          ID_FOLIO_NUMBER, 120, 45, 160, 14
+
+    CONTROL "Enter Check in date:", -1, "STATIC", SS_LEFT, 10, 70, 100, 12
+    EDITTEXT          ID_CHECK_IN_DATE, 120, 70, 160, 14
+
+    CONTROL "Enter Check out date:", -1, "STATIC", SS_LEFT, 10, 95, 100, 12
+    EDITTEXT           ID_CHECK_OUT_DATE, 120, 95, 160, 14
+
+    CONTROL "Enter No of days stayed:", -1, "STATIC", SS_LEFT, 10, 120, 100, 12
+    EDITTEXT           ID_NO_OF_DAYS_STAYED, 120, 120, 160, 14
+
+    DEFPUSHBUTTON    "&Ok", IDOK_ADD_NEW_GUEST, 60, 160, 80, 14
+    PUSHBUTTON       "&Cancel", IDCANCEL_ADD_NEW_GUEST, 160, 160, 80, 14
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_GUEST_NAME         "Guest Name"
+    IDS_FOLIO_NUMBER       "Folio Number"
+    IDS_CHECK_IN_DATE      "Check in date"
+    IDS_CHECK_OUT_DATE     "Check out date"
+    IDS_NO_OF_DAYS_STAYED  "No of days stayed"
+END
+
+
