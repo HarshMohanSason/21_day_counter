@@ -73,7 +73,48 @@ BEGIN
     PUSHBUTTON       "&Cancel", IDCANCEL_DELETE_GUEST , 160, 130, 80, 14
 END
 
+ID_DISPLAY_STATIC_SEARCH_DIALOG  DIALOG DISCARDABLE 0, 0, 290, 150
+CAPTION "Delete the guest information" 
+FONT 10, "MS Sans Serif"
+BEGIN
+    // Row 1: Static text for labels
+    CONTROL "Guest Name:", -1, "STATIC", SS_LEFT, 10, 20, 80, 12
+    CONTROL "Folio Number:", -1, "STATIC", SS_LEFT, 10, 40, 80, 12
+    CONTROL "Check-in Date:", -1, "STATIC", SS_LEFT, 10, 60, 80, 12
+    CONTROL "Check-out Date:", -1, "STATIC", SS_LEFT, 10, 80, 80, 12
+    CONTROL "Total days stayed:", -1, "STATIC", SS_LEFT, 10, 100, 80, 12
 
+    // Row 2: Static text for values (to display guest info)
+    CONTROL "", ID_GUEST_NAME, "STATIC", SS_LEFT, 100, 20, 200, 12
+    CONTROL "", ID_FOLIO_NUMBER, "STATIC", SS_LEFT, 100, 40, 200, 12
+    CONTROL "", ID_CHECK_IN_DATE, "STATIC", SS_LEFT, 100, 60, 200, 12
+    CONTROL "", ID_CHECK_OUT_DATE, "STATIC", SS_LEFT, 100, 80, 200, 12
+    CONTROL "", ID_NO_OF_DAYS_STAYED, "STATIC", SS_LEFT, 100, 100, 200, 12
+END
+
+ID_EDIT_GUEST_INFO DIALOG DISCARDABLE 0, 0, 300, 200
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit the current guest info"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL "New Guest Name:", -1, "STATIC", SS_LEFT, 10, 20, 100, 12
+    EDITTEXT          ID_GUEST_NAME, 120, 20, 160, 14
+
+    CONTROL "Enter Folio Number:", -1, "STATIC", SS_LEFT, 10, 45, 100, 12
+    EDITTEXT          ID_FOLIO_NUMBER, 120, 45, 160, 14
+
+    CONTROL "New Check in date:", -1, "STATIC", SS_LEFT, 10, 70, 100, 12
+    EDITTEXT          ID_CHECK_IN_DATE, 120, 70, 160, 14
+
+    CONTROL "New Check out date:", -1, "STATIC", SS_LEFT, 10, 95, 100, 12
+    EDITTEXT           ID_CHECK_OUT_DATE, 120, 95, 160, 14
+
+    CONTROL "No of days stayed:", -1, "STATIC", SS_LEFT, 10, 120, 100, 12
+    EDITTEXT           ID_NO_OF_DAYS_STAYED, 120, 120, 160, 14
+
+    DEFPUSHBUTTON    "&Done", IDEDIT_GUEST, 60, 160, 80, 14
+    PUSHBUTTON       "&Cancel", IDCANCEL_EDIT_GUEST, 160, 160, 80, 14
+END
 
 STRINGTABLE DISCARDABLE 
 BEGIN
