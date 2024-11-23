@@ -358,12 +358,13 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		    currentContext = SEARCH_GUEST;
             //Create a dialog box to search a guest 
             DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(ID_SEARCH_GUEST_DIALOG), hwnd, SearchGuestDlgProc);
-        }
+            break;
 		case ID_EDIT_GUEST_INFO:
 			currentContext = EDIT_GUEST; 
 			//Create the dialog box to first search the guest that needs to be edited. 
 			DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(ID_SEARCH_GUEST_DIALOG), hwnd, SearchGuestDlgProc);
         break;
+		}
     default:
         return DefWindowProc(hwnd, msg, wParam, lParam);
     }
@@ -433,6 +434,7 @@ BOOL CALLBACK AddGuestDlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lPa
                 EndDialog(hwnd, IDOK_ADD_NEW_GUEST); //Exit out of the dialog
                 break;
             }
+		break;
         }
         case IDCANCEL_ADD_NEW_GUEST:
             //Just exit the dialog if user decides to just cancel
@@ -467,13 +469,11 @@ BOOL CALLBACK DeleteGuestDlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM 
         case IDCANCEL_DELETE_GUEST:
             EndDialog(hwnd, IDCANCEL_DELETE_GUEST);
             break;
-        }
+        
 		case IDOK_DELETE_GUEST: 
 			 DeleteDataInDb(*guest);
 			 break;
-	case WM_CLOSE: 
-		EndDialog(hwnd, IDCANCEL_DELETE_GUEST);
-		
+		}
     default:
         return FALSE;
     }
@@ -523,7 +523,7 @@ BOOL CALLBACK SearchGuestDlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM 
 					DialogBoxParam(GetModuleHandle(NULL),
                     MAKEINTRESOURCE(ID_EDIT_GUEST_INFO),
                     hwnd,
-                    DeleteGuestDlgProc,
+                    EditGuestDlgProc,
                     reinterpret_cast < LPARAM > ( & guest));	
 					}
 				}
@@ -534,7 +534,7 @@ BOOL CALLBACK SearchGuestDlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM 
             break;
         }
         case IDCANCEL_SEARCH_GUEST:
-            EndDialog(hwnd, IDCANCEL_SEARCH_GUEST);
+			EndDialog(hwnd, IDCANCEL_SEARCH_GUEST);
             break;
         }
     default:
@@ -563,19 +563,15 @@ BOOL CALLBACK EditGuestDlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lP
         case IDEDIT_GUEST:
             EndDialog(hwnd,IDEDIT_GUEST);
             break;
-        }
+        
 		case IDCANCEL_EDIT_GUEST: 
-			 EndDialog(hwnd,IDEDIT_GUEST);
+			 EndDialog(hwnd,IDCANCEL_EDIT_GUEST);
 			 break;
-	case WM_CLOSE: 
-		EndDialog(hwnd, IDCANCEL_EDIT_GUEST);
-		
+		}
     default:
         return FALSE;
     }
     return TRUE;
-
-	
 }
 // ------------MAIN ENTRY FUNCTION ------------------
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
