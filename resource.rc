@@ -8,7 +8,8 @@ BEGIN
     BEGIN
         MENUITEM "&Add new guest", ID_ADD_NEW_GUEST
         MENUITEM "&Delete a guest", ID_DELETE_GUEST
-	MENUITEM "&Edit guest info", ID_EDIT_GUEST_INFO
+	    MENUITEM "&Edit guest info", ID_EDIT_GUEST_INFO
+		MENUITEM "&Search a guest", ID_SEARCH_GUEST 
     END
 END
 
@@ -35,6 +36,44 @@ BEGIN
     DEFPUSHBUTTON    "&Ok", IDOK_ADD_NEW_GUEST, 60, 160, 80, 14
     PUSHBUTTON       "&Cancel", IDCANCEL_ADD_NEW_GUEST, 160, 160, 80, 14
 END
+
+ID_SEARCH_GUEST_DIALOG DIALOG DISCARDABLE 0, 0, 300, 100
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Search the guest information" 
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL "Enter the Folio Number:", -1, "STATIC", SS_LEFT, 10, 20, 100, 12
+    EDITTEXT          ID_FOLIO_NUMBER, 120, 20, 160, 14
+   
+    DEFPUSHBUTTON    "&Search", IDSEARCH_GUEST, 60, 60, 80, 14
+    PUSHBUTTON       "&Cancel", IDCANCEL_SEARCH_GUEST , 160, 60, 80, 14
+END
+
+ID_DELETE_GUEST_DIALOG DIALOG DISCARDABLE 0, 0, 310, 180
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Delete the guest information" 
+FONT 8, "MS Sans Serif"
+BEGIN
+    // Row 1: Static text for labels
+    CONTROL "Guest Name:", -1, "STATIC", SS_LEFT, 10, 20, 80, 12
+    CONTROL "Folio Number:", -1, "STATIC", SS_LEFT, 10, 40, 80, 12
+    CONTROL "Check-in Date:", -1, "STATIC", SS_LEFT, 10, 60, 80, 12
+    CONTROL "Check-out Date:", -1, "STATIC", SS_LEFT, 10, 80, 80, 12
+    CONTROL "Total days stayed:", -1, "STATIC", SS_LEFT, 10, 100, 80, 12
+
+    // Row 2: Static text for values (to display guest info)
+    CONTROL "", ID_GUEST_NAME, "STATIC", SS_LEFT, 100, 20, 200, 12
+    CONTROL "", ID_FOLIO_NUMBER, "STATIC", SS_LEFT, 100, 40, 200, 12
+    CONTROL "", ID_CHECK_IN_DATE, "STATIC", SS_LEFT, 100, 60, 200, 12
+    CONTROL "", ID_CHECK_OUT_DATE, "STATIC", SS_LEFT, 100, 80, 200, 12
+    CONTROL "", ID_NO_OF_DAYS_STAYED, "STATIC", SS_LEFT, 100, 100, 200, 12
+
+    // Row 3: Buttons for Delete and Cancel
+    DEFPUSHBUTTON    "&Delete", IDOK_DELETE_GUEST, 60, 130, 80, 14
+    PUSHBUTTON       "&Cancel", IDCANCEL_DELETE_GUEST , 160, 130, 80, 14
+END
+
+
 
 STRINGTABLE DISCARDABLE 
 BEGIN
